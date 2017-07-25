@@ -1,5 +1,6 @@
-import torch.optim as optim
 import torch.nn as nn
+import torch.optim as optim
+
 from build_model import get_style_model_and_loss
 
 
@@ -12,12 +13,10 @@ def get_input_param_optimier(input_img):
     return input_param, optimizer
 
 
-def run_style_transfer(content_img, style_img, input_img,
-                       num_epoches=300):
+def run_style_transfer(content_img, style_img, input_img, num_epoches=300):
     print('Building the style transfer model..')
     model, style_loss_list, content_loss_list = get_style_model_and_loss(
-        style_img, content_img
-    )
+        style_img, content_img)
     input_param, optimizer = get_input_param_optimier(input_img)
 
     print('Opimizing...')
@@ -41,8 +40,7 @@ def run_style_transfer(content_img, style_img, input_img,
             if epoch[0] % 50 == 0:
                 print('run {}'.format(epoch))
                 print('Style Loss: {:.4f} Content Loss: {:.4f}'.format(
-                    style_score.data[0], content_score.data[0]
-                ))
+                    style_score.data[0], content_score.data[0]))
                 print()
 
             return style_score + content_score
